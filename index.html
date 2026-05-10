@@ -1,454 +1,321 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPLICEISM STUDIO | 拼接主義空間設計</title>
+    <title>Frank Gary Design | 室內設計案例展示</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        /* ==========================================
-           1. 基礎重置 & 高級感全域變數
-           ========================================== */
         :root {
-            --bg-color: #080808;
-            --text-color: #f4f4f4;
-            --accent-color: #888888;
-            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --bg: #080808;
+            --panel: #101010;
+            --text: #f4f4f4;
+            --muted: #a7a7a7;
+            --line: #242424;
+            --accent: #d9c7a3;
             --ease: cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
         }
+        a { color: inherit; text-decoration: none; }
+        img { display: block; width: 100%; }
 
-        /* ==========================================
-           2. 頂部導覽列
-           ========================================== */
         .navbar {
-            position: fixed; top: 0; width: 100%; padding: 2.5rem 4rem;
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 100; mix-blend-mode: difference;
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 20;
+            height: 88px;
+            padding: 0 6vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(8, 8, 8, 0.82);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
         }
-        .logo a { font-size: 1.2rem; font-weight: 700; letter-spacing: 5px; color: white; text-decoration: none; text-transform: uppercase; }
-        .nav-links { list-style: none; display: flex; gap: 3rem; }
-        .nav-links a { color: var(--text-color); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; transition: color 0.3s ease; }
-        .nav-links a:hover { color: var(--accent-color); }
-
-        /* ==========================================
-           3. 首頁：無縫網格系統與聚光燈特效
-           ========================================== */
-        .hero { flex: 1; padding-top: 100px; display: flex; align-items: center; }
-        .project-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; width: 100%; }
-        .project-card { position: relative; overflow: hidden; cursor: pointer; background-color: #000; display: block; text-decoration: none; }
-        .span-full { grid-column: span 2; height: 60vh; }
-        .span-half { grid-column: span 1; height: 50vh; }
-
-        .project-card img {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: grayscale(100%) brightness(0.7); 
-            transition: transform 1s var(--ease), filter 0.8s ease;
+        .logo {
+            font-family: "Noto Serif TC", serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
         }
-        .overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 60%);
-            opacity: 0.5; transition: opacity 0.5s ease;
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            color: var(--muted);
+            font-size: 0.92rem;
+            letter-spacing: 0.08em;
         }
-        .project-info {
-            position: absolute; bottom: -20px; left: 3rem; opacity: 0;
-            transition: all 0.6s var(--ease); z-index: 2;
-        }
-        .project-info h3 { font-size: 2.5rem; font-weight: 500; margin-bottom: 0.5rem; letter-spacing: 1px; color: #fff; }
-        .project-info p { font-size: 1rem; color: #ccc; letter-spacing: 1px; max-width: 600px; }
+        .nav-links a:hover { color: var(--text); }
 
-        .project-grid:hover .project-card img { filter: grayscale(100%) brightness(0.3); transform: scale(0.98); }
-        .project-grid .project-card:hover img { filter: grayscale(0%) brightness(1); transform: scale(1.03); }
-        .project-grid .project-card:hover .overlay { opacity: 0.8; }
-        .project-grid .project-card:hover .project-info { bottom: 3rem; opacity: 1; }
-
-        /* ==========================================
-           4. 頁尾 Footer (地理位置與聯絡方式)
-           ========================================== */
-        .footer {
-            width: 100%;
-            background-color: #050505;
-            border-top: 1px solid #1a1a1a;
-            padding: 5rem 4rem 2rem 4rem;
+        .hero {
+            min-height: 92vh;
+            padding: 148px 6vw 70px;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
+            grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+            align-items: center;
+            gap: 5vw;
+        }
+        .eyebrow {
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+        }
+        h1, h2, h3 {
+            font-family: "Noto Serif TC", serif;
+            line-height: 1.22;
+            letter-spacing: 0.04em;
+        }
+        h1 {
+            font-size: clamp(3rem, 7vw, 7.5rem);
+            margin-bottom: 1.5rem;
+        }
+        .lead {
+            max-width: 620px;
+            color: #d8d8d8;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        .hero-image {
+            height: min(66vh, 720px);
+            min-height: 420px;
+            overflow: hidden;
+            background: var(--panel);
+        }
+        .hero-image img {
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(0.35) brightness(0.88);
+        }
+
+        .section {
+            padding: 90px 6vw;
+            border-top: 1px solid var(--line);
+        }
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            align-items: end;
+            margin-bottom: 2.4rem;
+        }
+        .section-heading h2 { font-size: clamp(2rem, 4vw, 4rem); }
+        .section-heading p { max-width: 480px; color: var(--muted); }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+        .project-card {
+            background: var(--bg);
+            min-height: 520px;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            overflow: hidden;
+        }
+        .project-card img {
+            height: 100%;
+            min-height: 330px;
+            object-fit: cover;
+            filter: grayscale(1) brightness(0.72);
+            transition: filter 0.8s ease, transform 1.2s var(--ease);
+        }
+        .project-card:hover img {
+            filter: grayscale(0) brightness(0.96);
+            transform: scale(1.04);
+        }
+        .project-copy {
+            padding: 2rem;
+            min-height: 190px;
+        }
+        .project-copy h3 {
+            font-size: 1.45rem;
+            margin-bottom: 0.8rem;
+        }
+        .project-copy p {
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        .process {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--line);
+            border: 1px solid var(--line);
+        }
+        .step {
+            background: var(--panel);
+            padding: 2rem;
+            min-height: 220px;
+        }
+        .step span {
+            display: block;
+            color: var(--accent);
+            font-family: "Noto Serif TC", serif;
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+        }
+        .step h3 { font-size: 1.2rem; margin-bottom: 0.8rem; }
+        .step p { color: var(--muted); font-size: 0.95rem; }
+
+        .footer {
+            padding: 70px 6vw 34px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
             gap: 3rem;
+            color: var(--muted);
+            background: #050505;
+            border-top: 1px solid var(--line);
         }
-        .footer-col h4 {
-            color: #fff; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem; font-weight: 500;
+        .footer strong {
+            display: block;
+            color: var(--text);
+            font-family: "Noto Serif TC", serif;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
         }
-        .footer-col p { color: #888; font-size: 0.9rem; line-height: 1.8; margin-bottom: 0.5rem; }
-        .footer-col a { color: #888; text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; display: block; margin-bottom: 0.5rem; }
-        .footer-col a:hover { color: #fff; }
-        .footer-logo { font-size: 1.5rem; font-weight: 700; letter-spacing: 4px; color: #fff; margin-bottom: 1rem; display: block; text-decoration: none; }
-        
-        .footer-bottom {
-            grid-column: span 4;
-            border-top: 1px solid #111;
-            margin-top: 3rem;
+        .footer h4 {
+            color: var(--text);
+            font-size: 0.9rem;
+            letter-spacing: 0.16em;
+            margin-bottom: 1rem;
+        }
+        .copyright {
+            grid-column: 1 / -1;
             padding-top: 2rem;
-            text-align: center;
-            color: #444;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
+            border-top: 1px solid #151515;
+            font-size: 0.82rem;
+            color: #666;
         }
 
-        /* ==========================================
-           5. 詳細介紹頁面 (所有 Modal 彈出視窗)
-           ========================================== */
-        .project-modal {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-color: var(--bg-color); z-index: 200;
-            opacity: 0; visibility: hidden; transition: opacity 0.6s var(--ease), visibility 0.6s var(--ease);
-            overflow-y: auto;
+        @media (max-width: 900px) {
+            .navbar { height: auto; min-height: 78px; align-items: flex-start; flex-direction: column; gap: 0.7rem; padding-block: 1rem; }
+            .nav-links { flex-wrap: wrap; gap: 1rem; }
+            .hero { grid-template-columns: 1fr; padding-top: 150px; }
+            .project-grid, .process, .footer { grid-template-columns: 1fr; }
+            .section-heading { display: block; }
+            .section-heading p { margin-top: 1rem; }
+            .copyright { grid-column: auto; }
         }
-        .project-modal:target { opacity: 1; visibility: visible; }
-        .close-btn { position: fixed; top: 2.5rem; right: 4rem; font-size: 3rem; color: var(--accent-color); text-decoration: none; line-height: 1; transition: color 0.3s ease, transform 0.3s ease; z-index: 300; }
-        .close-btn:hover { color: #fff; transform: scale(1.1); }
-
-        .modal-content { max-width: 1100px; margin: 120px auto; padding: 0 4rem; }
-        
-        .modal-header { margin-bottom: 5rem; border-left: 3px solid #fff; padding-left: 2.5rem; }
-        .modal-header h1 { font-size: 4rem; font-weight: 500; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -1px; }
-        .modal-header p { font-size: 1.2rem; color: var(--accent-color); font-weight: 300; letter-spacing: 2px; text-transform: uppercase; }
-
-        .modal-text h3 { font-size: 1.6rem; color: #fff; margin-bottom: 1.5rem; font-weight: 500; letter-spacing: 2px; }
-        .modal-text p { font-size: 1.15rem; color: #aaa; line-height: 1.9; margin-bottom: 2rem; font-weight: 300; }
-
-        .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin: 5rem 0; }
-        .detail-item img { width: 100%; height: 500px; object-fit: cover; border: 1px solid #1a1a1a; filter: brightness(0.9); transition: filter 0.5s ease; }
-        .detail-item img:hover { filter: brightness(1); }
-        .detail-item p { margin-top: 1.2rem; font-size: 0.9rem; color: var(--accent-color); letter-spacing: 2px; text-transform: uppercase; font-weight: 300; }
-
-        .hero-image { width: 100%; height: 400px; object-fit: cover; margin-bottom: 4rem; border: 1px solid #1a1a1a; }
-
-        .tech-specs { width: 100%; border-collapse: collapse; margin: 6rem 0 10rem 0; border-top: 1px solid #222; }
-        .tech-specs td { padding: 1.8rem 0; border-bottom: 1px solid #1a1a1a; font-size: 0.95rem; }
-        .spec-label { color: var(--accent-color); width: 30%; text-transform: uppercase; letter-spacing: 2px; font-weight: 300; }
-        .spec-value { color: #fff; font-weight: 300; letter-spacing: 1px; }
-
-        /* ==========================================
-           6. Contact 聯絡頁面排版
-           ========================================== */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; margin-top: 2rem; margin-bottom: 10rem;}
-        .contact-col { border-top: 1px solid #333; padding-top: 2rem; }
-        .contact-item { margin-bottom: 3rem; }
-        .contact-item h4 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 1rem; color: var(--accent-color); }
-        .contact-item p { color: #fff; line-height: 1.8; margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 300; }
-        .contact-item a { color: #fff; text-decoration: none; border-bottom: 1px solid #555; padding-bottom: 4px; transition: 0.3s; font-size: 1.2rem; font-weight: 300; }
-        .contact-item a:hover { border-color: #fff; color: var(--accent-color); }
-
-        /* ==========================================
-           7. Process 服務流程專屬排版 (白話文版本)
-           ========================================== */
-        .process-list { margin-top: 4rem; margin-bottom: 8rem; }
-        .process-step { display: flex; border-top: 1px solid #222; padding: 4rem 0; }
-        .process-num { font-size: 3rem; font-weight: 300; color: var(--accent-color); width: 15%; line-height: 1; }
-        .process-desc { width: 85%; }
-        .process-desc h4 { font-size: 1.5rem; color: #fff; margin-bottom: 1rem; font-weight: 500; letter-spacing: 1px; }
-        .process-desc p { font-size: 1.15rem; color: #aaa; line-height: 1.9; font-weight: 300; }
     </style>
 </head>
 <body>
-
     <nav class="navbar">
-        <div class="logo"><a href="index.html">SPLICEISM</a></div>
+        <a class="logo" href="#top">Frank Gary Design</a>
         <ul class="nav-links">
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#modal-process">Process</a></li>
-            <li><a href="#modal-philosophy">Philosophy</a></li>
-            <li><a href="#modal-contact">Contact</a></li>
+            <li><a href="#projects">設計案例</a></li>
+            <li><a href="#process">服務流程</a></li>
+            <li><a href="#contact">聯絡我們</a></li>
         </ul>
     </nav>
 
-    <section id="projects" class="hero">
-        <div class="project-grid">
-            <a href="#detail-01" class="project-card span-full">
-                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2000&q=80" alt="Steel & Warmth">
-                <div class="overlay"></div>
-                <div class="project-info">
-                    <h3>Steel & Warmth</h3>
-                    <p>剛硬結構與溫潤皮件的優雅對話。</p>
-                </div>
-            </a>
-            <a href="#detail-02" class="project-card span-half">
-                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80" alt="Seamless Void">
-                <div class="overlay"></div>
-                <div class="project-info">
-                    <h3>Seamless Void</h3>
-                    <p>隱去繁雜，挑戰極致無縫的空間留白。</p>
-                </div>
-            </a>
-            <a href="#detail-03" class="project-card span-half">
-                <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1000&q=80" alt="Refracted Elegance">
-                <div class="overlay"></div>
-                <div class="project-info">
-                    <h3>Refracted Elegance</h3>
-                    <p>以黃銅與水晶，重塑光影的奢華幾何。</p>
-                </div>
-            </a>
-        </div>
-    </section>
+    <main id="top">
+        <section class="hero">
+            <div>
+                <div class="eyebrow">Interior Design Studio</div>
+                <h1>以精準比例，重塑居住的溫度。</h1>
+                <p class="lead">Frank Gary Design 專注住宅與商業空間設計，從動線、材質、光影到收納細節，將日常使用需求轉化為沉穩、耐看的空間體驗。</p>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=80" alt="高質感室內空間">
+            </div>
+        </section>
 
-    <footer class="footer">
-        <div class="footer-col">
-            <a href="#" class="footer-logo">SPLICEISM</a>
-            <p>我們不只設計空間，<br>更在乎您的居住體驗。</p>
+        <section id="projects" class="section">
+            <div class="section-heading">
+                <h2>精選案例</h2>
+                <p>每一個專案都從生活方式出發，保留空間的自然節奏，並以材質交界與照明層次完成細節。</p>
+            </div>
+            <div class="project-grid">
+                <article class="project-card">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1000&q=80" alt="現代住宅客廳">
+                    <div class="project-copy">
+                        <h3>靜謐住宅</h3>
+                        <p>以胡桃木、霧面金屬與柔和燈帶建立安定感，讓客廳、餐廚與書房在開放格局中維持清楚界線。</p>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80" alt="極簡展示空間">
+                    <div class="project-copy">
+                        <h3>私人藝廊</h3>
+                        <p>透過留白牆面與隱藏式燈光，將展示物件推到視覺中心，讓空間成為作品最安靜的襯底。</p>
+                    </div>
+                </article>
+                <article class="project-card">
+                    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1000&q=80" alt="精緻臥室設計">
+                    <div class="project-copy">
+                        <h3>都會宅邸</h3>
+                        <p>運用石材、玻璃與布面材質形成細緻反差，兼顧居住舒適度與迎賓時的儀式感。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="process" class="section">
+            <div class="section-heading">
+                <h2>服務流程</h2>
+                <p>從初談到完工交付，我們以清楚節點協助業主掌握進度、預算與施工品質。</p>
+            </div>
+            <div class="process">
+                <div class="step">
+                    <span>01</span>
+                    <h3>需求訪談</h3>
+                    <p>了解家庭成員、生活習慣、預算範圍與基地條件，建立設計方向。</p>
+                </div>
+                <div class="step">
+                    <span>02</span>
+                    <h3>設計提案</h3>
+                    <p>提出平面配置、材質語彙與視覺風格，協助業主確認空間輪廓。</p>
+                </div>
+                <div class="step">
+                    <span>03</span>
+                    <h3>工程管理</h3>
+                    <p>整合工班、材料與施工節點，定期回報進度並控管現場品質。</p>
+                </div>
+                <div class="step">
+                    <span>04</span>
+                    <h3>完工交付</h3>
+                    <p>完成細部驗收、軟裝定位與使用說明，讓新空間順利進入日常。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div>
+            <strong>Frank Gary Design</strong>
+            <p>我們相信好的設計不只被看見，更會在每天的使用裡慢慢被感受到。</p>
         </div>
-        <div class="footer-col">
-            <h4>Location</h4>
-            <p>Shilin District,</p>
-            <p>Taipei City, Taiwan</p>
-            <p>111 台北市士林區</p>
-        </div>
-        <div class="footer-col">
-            <h4>Contact</h4>
-            <a href="mailto:inquiry@spliceism.studio">inquiry@spliceism.studio</a>
+        <div>
+            <h4>聯絡方式</h4>
+            <p>inquiry@frankgary.design</p>
             <p>+886 2 2881 0000</p>
-            <p>採全預約制</p>
         </div>
-        <div class="footer-col">
-            <h4>Social</h4>
-            <a href="#">Instagram</a>
-            <a href="#">Behance</a>
-            <a href="#">Pinterest</a>
+        <div>
+            <h4>服務地區</h4>
+            <p>台北、新北、桃園與全台專案洽詢</p>
         </div>
-        <div class="footer-bottom">
-            © 2026 SPLICEISM STUDIO. ALL RIGHTS RESERVED. | INTERIOR DESIGN & DECORATION.
-        </div>
+        <div class="copyright">&copy; 2026 Frank Gary Design. All rights reserved.</div>
     </footer>
-
-    <div id="detail-01" class="project-modal">
-        <a href="#" class="close-btn">×</a>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>Steel & Warmth</h1>
-                <p>Residential Space / Taipei, 2026</p>
-            </div>
-            <div class="modal-text">
-                <h3>空間語彙 (Spatial Concept)</h3>
-                <p>本案旨於探討「衝突美學的極致平衡」。在這處擁有 40 年歷史的宅邸中，我們刻意保留了原始建築的粗獷骨幹，並植入現代洗鍊的霧黑鐵件。為了中和金屬的冷冽感，我們在立面與軟裝上，大量拼接了職人手工打磨的胡桃實木與頂級苯染皮。透過異材質的碰撞，創造出極具視覺張力卻又沉穩內斂的生活疆域。</p>
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80" alt="Spatial Planning">
-                    <p>01. Spatial Flow / 空間動線與光影引導</p>
-                </div>
-                <div class="detail-item">
-                    <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=800&q=80" alt="Material Texture">
-                    <p>02. Materiality / 頂級苯染皮與實木的肌理對接</p>
-                </div>
-            </div>
-            <div class="modal-text">
-                <h3>細節雕琢 (Design Details)</h3>
-                <p>我們深知住宅空間必須回歸「人」的本質。在冷硬的結構轉換處，我們運用了精細的隱形收邊手法，並在轉角處融入微弧度設計，不僅弱化了空間的銳氣，更賦予了居者絕對的安全感與溫柔的觸覺體驗。材質與材質的每一處交接，都是縝密對話的結果。</p>
-            </div>
-            <table class="tech-specs">
-                <tr><td class="spec-label">Design & Build</td><td class="spec-value">120 Days / 設計與施工期 4 個月</td></tr>
-                <tr><td class="spec-label">Key Elements</td><td class="spec-value">霧黑烤漆鐵件, 義大利胡桃木, 訂製苯染皮</td></tr>
-                <tr><td class="spec-label">Detailing</td><td class="spec-value">無縫異材質拼接工法</td></tr>
-                <tr><td class="spec-label">Area</td><td class="spec-value">150 sq.m / 45 坪</td></tr>
-            </table>
-        </div>
-    </div>
-
-    <div id="detail-02" class="project-modal">
-        <a href="#" class="close-btn">×</a>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>Seamless Void</h1>
-                <p>Private Gallery / Shanghai, 2026</p>
-            </div>
-            <div class="modal-text">
-                <h3>空間語彙 (Spatial Concept)</h3>
-                <p>業主期盼一座能隔絕喧囂、達到「絕對零雜訊」的私人藝廊。我們以「侘寂（Wabi-sabi）」為底蘊，挑戰將空間中所有的機能性元素完全隱匿。15 米長的連續展牆，覆蓋著手工鏝抹的藝術微水泥，在極簡的語境中展現出純粹而深邃的空間詩意。</p>
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item">
-                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Minimalist Geometry">
-                    <p>01. Pure Geometry / 隱去繁雜的立面分割</p>
-                </div>
-                <div class="detail-item">
-                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=800&q=80" alt="Micro-cement Texture">
-                    <p>02. Texture / 藝術微水泥的光影折射</p>
-                </div>
-            </div>
-            <div class="modal-text">
-                <h3>細節雕琢 (Design Details)</h3>
-                <p>為了維持視覺的絕對純淨，我們摒棄了傳統的門框與鉸鏈。藉由精密計算的暗門系統與重型地極軌道，將通往私領域的門片與展牆化為一體。在自然光的洗禮下，整個空間宛如一塊未經雕琢的原石，呈現出一體成型的雕塑美感。</p>
-            </div>
-            <table class="tech-specs">
-                <tr><td class="spec-label">Design & Build</td><td class="spec-value">180 Days / 設計與施工期 6 個月</td></tr>
-                <tr><td class="spec-label">Key Elements</td><td class="spec-value">藝術微水泥, 義大利洞石, 頂級隱藏式五金</td></tr>
-                <tr><td class="spec-label">Aesthetic</td><td class="spec-value">極致留白與連續面設計</td></tr>
-                <tr><td class="spec-label">Area</td><td class="spec-value">320 sq.m / 96 坪</td></tr>
-            </table>
-        </div>
-    </div>
-
-    <div id="detail-03" class="project-modal">
-        <a href="#" class="close-btn">×</a>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>Refracted Elegance</h1>
-                <p>Luxury Penthouse / Urban Core, 2026</p>
-            </div>
-            <div class="modal-text">
-                <h3>空間語彙 (Spatial Concept)</h3>
-                <p>坐落於都會雲端的頂層豪宅，擁有無可挑剔的天際線，卻也面臨強烈西曬的考驗。我們拒絕以厚重的布幔遮蔽這份奢華景致。取而代之的，是利用訂製黃銅與手工光學玻璃構築的「光影濾波器」，將刺眼的直射光轉化為空間中最迷人的天然藝術品。</p>
-            </div>
-            <div class="detail-grid">
-                <div class="detail-item">
-                    <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=800&q=80" alt="Light Refraction">
-                    <p>01. Light Aesthetics / 玻璃折射的柔和光暈</p>
-                </div>
-                <div class="detail-item">
-                    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80" alt="Brass Details">
-                    <p>02. Luxury Details / 訂製黃銅與絲綢的奢華觸感</p>
-                </div>
-            </div>
-            <div class="modal-text">
-                <h3>細節雕琢 (Design Details)</h3>
-                <p>長虹玻璃的立體溝槽將光線切割成柔和的線性幾何，並在室內的磨砂金屬與高光澤絲綢軟裝上進行二次漫射。白天，它是篩濾日光的優雅屏風；夜晚，則在環境燈的映照下，讓整個客廳散發出宛如高級珠寶盒般的低調奢華氛圍。</p>
-            </div>
-            <table class="tech-specs">
-                <tr><td class="spec-label">Design & Build</td><td class="spec-value">150 Days / 設計與施工期 5 個月</td></tr>
-                <tr><td class="spec-label">Key Elements</td><td class="spec-value">手工黃銅鍍鈦, 光學長虹玻璃, 頂級絲綢軟裝</td></tr>
-                <tr><td class="spec-label">Aesthetic</td><td class="spec-value">奢華光影與幾何矩陣</td></tr>
-                <tr><td class="spec-label">Area</td><td class="spec-value">220 sq.m / 66 坪</td></tr>
-            </table>
-        </div>
-    </div>
-
-    <div id="modal-process" class="project-modal">
-        <a href="#" class="close-btn">×</a>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>Service Process</h1>
-                <p>Design & Execution / 我們的服務流程</p>
-            </div>
-            
-            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=80" alt="Architecture Process" class="hero-image">
-            
-            <div class="modal-text">
-                <p>我們將複雜的室內裝修，轉化為五個清晰透明的步驟。讓您在整個設計與施工期間，都能安心並清楚掌握目前的進度與細節。</p>
-            </div>
-
-            <div class="process-list">
-                <div class="process-step">
-                    <div class="process-num">01</div>
-                    <div class="process-desc">
-                        <h4>初步溝通與現場勘估</h4>
-                        <p>這是一切的起點。我們會詳細了解您的生活習慣、家庭成員需求以及預算範圍，並親自前往現場進行丈量與屋況評估，確保後續的設計完全符合您的實際生活。</p>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="process-num">02</div>
-                    <div class="process-desc">
-                        <h4>平面圖規劃與設計提案</h4>
-                        <p>根據您的需求，我們會提出最順暢的空間動線配置圖。確認平面圖後，會進一步透過 3D 模擬圖與材質板，與您具體討論空間的風格走向與色彩搭配。</p>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="process-num">03</div>
-                    <div class="process-desc">
-                        <h4>材質確認與工程報價</h4>
-                        <p>設計定案後，我們將陪同您挑選適合的建材、燈具與五金配件。確認所有細節後，我們會提供一份公開透明、條列清晰的工程報價單，絕不隱藏額外費用。</p>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="process-num">04</div>
-                    <div class="process-desc">
-                        <h4>進場施工與專案管理</h4>
-                        <p>由我們配合多年的專業工班進場施工。設計師與工務人員會嚴格把關施工品質，並定期透過照片或影片向您回報工程進度，讓您免去來回奔波的辛勞。</p>
-                    </div>
-                </div>
-                <div class="process-step">
-                    <div class="process-num">05</div>
-                    <div class="process-desc">
-                        <h4>軟裝進場與完工交屋</h4>
-                        <p>硬體工程完工後，我們會協助傢俱、窗簾與裝飾品的定位佈置。最後，設計師會陪同您進行全室的詳細驗收，確認一切完美無瑕後，正式將新家交給您。</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-philosophy" class="project-modal">
-        <a href="#" class="close-btn">×</a>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>The Aesthetics<br>of Precision.</h1>
-                <p>Our Philosophy / 我們的設計信仰</p>
-            </div>
-            
-            <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80" alt="Seamless Design Details" class="hero-image">
-
-            <div class="modal-text">
-                <h3>空間的靈魂</h3>
-                <p>我們不將設計視為單純的裝飾堆砌，而是靈魂的安放。SPLICEISM (拼接主義) 的起點，不盲從任何單一風格標籤，而是深入探尋人與空間的本質對話。我們將對美學極度偏執的優雅，落實於每一個材質的物理肌理與光影層次的佈局。</p>
-                
-                <h3>完美拼接的工藝</h3>
-                <p>真正的奢華，隱含於毫米級的精準與視覺上的絕對流動。我們拒絕繁複，追求「隱形收邊」的極致工法。冷冽的金屬、溫潤的實木與質樸的天然石材，異材質在我們的精密佈局下完美拼接，無縫融合，呈現出一體成型的空間雕塑感。</p>
-                
-                <h3>光影的雕塑</h3>
-                <p>光線不只是照明，更是空間的第四維度。我們精密計算光影的折射與漫射，重塑空間的奢華幾何。白天，它是篩濾日光的優雅屏風；夜晚，則在環境燈的映照下，構築出如珠寶盒般閃耀卻不刺眼的沉浸式藝術氛圍。</p>
-                
-                <h3>為卓絕品味客製化</h3>
-                <p>我們將空間視為一件巨大的高級訂製服。從尺度的剪裁、材質溫度的拿捏，到動線起承轉合的安排，每一個細節都經過反覆推敲。我們致力於為品味卓絕的客戶，打造出不僅具備視覺張力，更能深刻共鳴的當代生活藝境。</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="modal-contact" class="project-modal">
-        <a href="#" class="close-btn">×</a>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1>Initiate<br>A Dialogue.</h1>
-                <p>Get in Touch / 與我們聯繫</p>
-            </div>
-            <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80" alt="Studio Image" class="hero-image">
-            <div class="contact-grid">
-                <div class="contact-col">
-                    <div class="contact-item">
-                        <h4>Design Inquiries / 專案諮詢</h4>
-                        <p>本工作室採全預約制。<br>誠摯邀請您來信分享您的空間願景與基地概況。</p>
-                        <a href="mailto:inquiry@spliceism.studio">inquiry@spliceism.studio</a>
-                    </div>
-                    <div class="contact-item">
-                        <h4>Headquarters / 總部位置</h4>
-                        <p>Shilin District, Taipei City, Taiwan<br>台北市 士林區</p>
-                    </div>
-                </div>
-                <div class="contact-col">
-                    <div class="contact-item">
-                        <h4>Press & Media / 媒體與公關</h4>
-                        <p>如需出版物圖片或採訪邀約，請聯繫媒體部門。</p>
-                        <a href="mailto:press@spliceism.studio">press@spliceism.studio</a>
-                    </div>
-                    <div class="contact-item">
-                        <h4>Social / 社群與作品集</h4>
-                        <p>探索我們最新的空間攝影與幕後絮語。</p>
-                        <a href="#">Instagram / @spliceism.design</a><br>
-                        <a href="#">Behance / Spliceism Studio</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 </body>
 </html>
